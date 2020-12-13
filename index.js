@@ -35,11 +35,25 @@ const promptUser = () => {
 			type: "input",
 			name: "title",
 			message: "Project title:",
+			validate(input) {
+				if (!input) {
+					return console.log("\nA project title is required.");
+				}
+
+				return true;
+			},
 		},
 		{
 			type: "input",
 			name: "description",
 			message: "Description:",
+			validate(input) {
+				if (!input) {
+					return console.log("\nA description for your project is required.");
+				}
+
+				return true;
+			},
 		},
 		{
 			type: "input",
@@ -76,6 +90,15 @@ const promptUser = () => {
 			type: "input",
 			name: "email",
 			message: "Email of project creator:",
+			validate(input) {
+				const regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+				if (input && !input.match(regex)) {
+					return console.log("\nInvalid email");
+				}
+
+				return true;
+			},
 		},
 	]);
 };
@@ -141,7 +164,8 @@ const generateREADME = ({
 }) => `# ${title}
 ${generateLicenseBadge(license, licenseObj[license].color)}
 
-${description ? generateSection("Description", description) : ""}
+## Description
+${description}
 
 ## Table of Contents
 ${installation ? "- [Installation](#installation)" : ""}

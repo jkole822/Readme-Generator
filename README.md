@@ -1,9 +1,10 @@
-# 
-![license](https://img.shields.io/static/v1?label=license&message=MIT&color=green&style=for-the-badge)
+# awd
+![license](https://img.shields.io/static/v1?label=license&message=GNU%20GPLv3&color=red&style=for-the-badge)
 
+## Description
+awd
 
-
-
+## Table of Contents
 
 
 
@@ -22,4 +23,4 @@
 
 
 ## License
-[MIT](https://choosealicense.com/licenses/mit)
+[GNU GPLv3](https://choosealicense.com/licenses/gpl-3.0)
