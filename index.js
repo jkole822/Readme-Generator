@@ -140,7 +140,8 @@ Email: ${email}  `)
 		: (usernameLine = "");
 
 	return `## Questions
-${emailLine + usernameLine}`;
+${emailLine}
+${usernameLine}`;
 };
 
 const generateLicenseBadge = (license, color) =>
