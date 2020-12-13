@@ -34,7 +34,7 @@ const promptUser = () => {
 		{
 			type: "input",
 			name: "title",
-			message: "Enter in the title of your project:",
+			message: "Project title:",
 		},
 		{
 			type: "input",
@@ -43,18 +43,13 @@ const promptUser = () => {
 		},
 		{
 			type: "input",
-			name: "instructions",
+			name: "installation",
 			message: "Installation instructions:",
 		},
 		{
 			type: "input",
-			name: "usage-instructions",
+			name: "usage",
 			message: "Usage instructions:",
-		},
-		{
-			type: "input",
-			name: "usage-examples",
-			message: "Examples for usage:",
 		},
 		{
 			type: "input",
@@ -70,12 +65,105 @@ const promptUser = () => {
 			type: "list",
 			name: "license",
 			message: "Choose a license:",
-			choices: ["MIT", "ISC", "Apache License 2.0", "GNU GPLv2", "GNU GPLv3"],
+			choices: ["MIT", "ISC", "Apache License 2.0", "GNU GPLv3"],
+		},
+		{
+			type: "input",
+			name: "username",
+			message: "GitHub username of project creator:",
+		},
+		{
+			type: "input",
+			name: "email",
+			message: "Email of project creator:",
 		},
 	]);
 };
 
-const generateREADME = answers => ``;
+const licenseObj = {
+	MIT: {
+		color: "green",
+		path: "mit",
+	},
+	ISC: {
+		color: "blue",
+		path: "isc",
+	},
+	"Apache License 2.0": {
+		color: "blueviolet",
+		path: "apache-2.0",
+	},
+	"GNU GPLv3": {
+		color: "red",
+		path: "gpl-3.0",
+	},
+};
+
+const generateSection = (header, info) => {
+	return `## ${header}
+${info}`;
+};
+
+const generateQuestionsSection = (username, email) => {
+	let emailLine;
+	let usernameLine;
+
+	email
+		? (emailLine = `Please feel free to contact via email if you have any questions pertaining to this project.  
+Email: ${email}  `)
+		: (emailLine = "");
+	username
+		? (usernameLine = `[GitHub Profile](https://github.com/${username})`)
+		: (usernameLine = "");
+
+	return `## Questions
+${emailLine + usernameLine}`;
+};
+
+const generateLicenseBadge = (license, color) =>
+	`![license](https://img.shields.io/static/v1?label=license&message=${encodeURIComponent(
+		license
+	)}&color=${color}&style=for-the-badge)`;
+
+const generateLicenseUrl = licensePath =>
+	`https://choosealicense.com/licenses/${licensePath}`;
+
+const generateREADME = ({
+	title,
+	description,
+	installation,
+	usage,
+	contributing,
+	test,
+	license,
+	username,
+	email,
+}) => `# ${title}
+${generateLicenseBadge(license, licenseObj[license].color)}
+
+${description ? generateSection("Description", description) : ""}
+
+## Table of Contents
+${installation ? "- [Installation](#installation)" : ""}
+${usage ? "- [Usage](#usage)" : ""}
+${contributing ? "- [Contributing](#contributing)" : ""}
+${test ? "- [Tests](#tests)" : ""}
+${username || email ? "- [Questions](#questions)" : ""}
+${license ? "- [License](#license)" : ""}
+
+${installation ? generateSection("Installation", installation) : ""}
+
+${usage ? generateSection("Usage", usage) : ""}
+
+${contributing ? generateSection("Contributing", contributing) : ""}
+
+${test ? generateSection("Tests", test) : ""}
+
+${username || email ? generateQuestionsSection(username, email) : ""}
+
+## License
+[${license}](${generateLicenseUrl(licenseObj[license].path)})
+`;
 
 const init = async () => {
 	try {
