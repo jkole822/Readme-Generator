@@ -6,6 +6,16 @@
 
 A command line application that generates a professional README.md file from a user's input using the inquirer package.
 
+
+## Table of Contents
+
+- [Visuals](#visuals)
+- [Walkthrough Video](#walkthrough)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Questions](#questions)
+- [License](#license)
+
 ## Visuals
 
 ### README Generator Command Line Prompts
@@ -16,12 +26,8 @@ A command line application that generates a professional README.md file from a u
 
 ![README File](images/readme.png)
 
-## Table of Contents
-
-- [Installation](#installation)
-- [Usage](#usage)
-- [Questions](#questions)
-- [License](#license)
+## Walkthrough
+[Video walkthrough](https://drive.google.com/file/d/1sP6K89RjmjyjltV2r9SiRmbAkT1j5YL1/view)
 
 ## Installation
 
